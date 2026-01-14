@@ -12,6 +12,9 @@
 ## Database used:
 MongoDB: https://account.mongodb.com/account/login
 
+## Data link:
+Kaggle: https://www.kaggle.com/datasets/moro23/easyvisa-dataset
+
 
 ## How to run?
 
