@@ -28,4 +28,4 @@ python-multipart
 # if you are getting mongoDB erron use this cmd
 
 # pip uninstall -y pymongo motor mongoengine djongo
-# pip install -U "pymongo>=4.7" dnspython certified
+# pip install -U "pymongo>=4.7" dnspython certifi
