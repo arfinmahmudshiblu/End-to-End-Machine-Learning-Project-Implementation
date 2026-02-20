@@ -35,11 +35,7 @@ conda activate visa
 pip install -r requirements.txt
 ```
 
-# Export the environment variable
 
-export MONGODB_URL="mongodb+srv://entarfin:<db_password>@cluster0.y9ggd0v.mongodb.net/?appName=Cluster0"
 
-export AWS_ACCESS_KEY_ID=<AWS_ACCESS_KEY_ID>
 
-export AWS_SECRET_ACCESS_KEY=<AWS_SECRET_ACCESS_KEY>
 
