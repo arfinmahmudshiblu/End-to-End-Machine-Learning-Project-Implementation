@@ -11,12 +11,12 @@ from us_visa.exception import USvisaException
 
 class USvisaData:
     """
-    This class helps to export entire MongoDB collections as pandas DataFrames.
+    This class exports MongoDB collections as pandas DataFrames.
     """
 
     def __init__(self):
         """
-        Initialize the MongoDB client.
+        Initialize MongoDB client.
         """
         try:
             self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
@@ -24,39 +24,37 @@ class USvisaData:
             raise USvisaException(e, sys) from e
 
     def export_collection_as_dataframe(
-        self, collection_name: str, database_name: Optional[str] = None
+        self,
+        collection_name: str,
+        database_name: Optional[str] = None
     ) -> pd.DataFrame:
         """
-        Export an entire MongoDB collection as a pandas DataFrame.
-
-        Args:
-            collection_name (str): Name of the MongoDB collection.
-            database_name (Optional[str]): If provided, overrides the default database.
-
-        Returns:
-            pd.DataFrame: DataFrame containing the collection data.
+        Export a MongoDB collection into a pandas DataFrame.
         """
         try:
-            # Select the database
-            db = self.mongo_client.database if database_name is None else self.mongo_client.client[database_name]
+            # Select database safely
+            if database_name:
+                db = self.mongo_client.client[database_name]
+            else:
+                db = self.mongo_client.database
 
-            # Get the collection
+            # Get collection
             collection = db[collection_name]
 
-            # Fetch all documents
+            # Fetch data
             data = list(collection.find())
 
             if not data:
-                return pd.DataFrame()  # Return empty DataFrame if collection is empty
+                return pd.DataFrame()
 
             # Convert to DataFrame
             df = pd.DataFrame(data)
 
-            # Drop MongoDB '_id' field if exists
+            # Drop MongoDB internal id field
             if "_id" in df.columns:
-                df = df.drop(columns=["_id"])
+                df.drop(columns=["_id"], inplace=True)
 
-            # Replace string "na" with np.nan
+            # Normalize missing values
             df.replace("na", np.nan, inplace=True)
 
             return df

@@ -50,3 +50,23 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.2wvohg6.mongodb.net/?appN
 4. model_trainer.py
 5. model_evaluation.py
 6. model_pusher.py
+
+
+# First Work Flow
+1. constant
+2. config_entity.py
+3. artifact_entity.py
+4. mongodb_connection.py
+5. usvisa_data.py
+6. component_data_ingestion.py
+7. training_pipeline.py
+8. demo.py
+
+# Second Work Flow
+1. constant
+2. config_schema.yaml
+3. config_entity.py
+4. artifact_entity.py
+5. component_data_validation.py
+6. training_pipeline.py
+7. demo.py

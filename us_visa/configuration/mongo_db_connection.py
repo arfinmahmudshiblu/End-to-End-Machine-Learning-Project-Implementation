@@ -17,19 +17,14 @@ class MongoDBClient:
     """
     MongoDB Client Handler
 
-    Description:
-        Establishes and manages a MongoDB connection.
-
-    Attributes:
-        client (MongoClient): Shared MongoDB client instance
-        database (Database): Selected database instance
+    Establishes and manages a singleton MongoDB connection.
     """
 
     client: Optional[pymongo.MongoClient] = None
 
     def __init__(self, database_name: str = DATABASE_NAME) -> None:
         try:
-            # Initialize client only once (Singleton pattern)
+            # Initialize singleton client only once
             if MongoDBClient.client is None:
                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
 
@@ -42,15 +37,18 @@ class MongoDBClient:
                     mongo_db_url,
                     tls=True,
                     tlsCAFile=ca,
-                    serverSelectionTimeoutMS=5000  # fail fast if cannot connect
+                    serverSelectionTimeoutMS=5000
                 )
 
-                # Test connection
+                # Verify connection
                 MongoDBClient.client.admin.command("ping")
                 logging.info("MongoDB connection established successfully.")
 
-            # Assign shared client
             self.client = MongoDBClient.client
+
+            if self.client is None:
+                raise ValueError("MongoDB client initialization failed.")
+
             self.database = self.client[database_name]
             self.database_name = database_name
 
@@ -60,7 +58,7 @@ class MongoDBClient:
 
     def get_collection(self, collection_name: str):
         """
-        Get a collection from the database
+        Return a MongoDB collection object.
         """
         try:
             return self.database[collection_name]
