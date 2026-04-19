@@ -27,11 +27,11 @@ git clone https://github.com/arfinmahmudshiblu/End-to-End-Machine-Learning-Proje
 ```
 
 ```bash
-conda create -n cnncls python=3.8 -y
+conda create -n webapp python=3.12 -y
 ```
 
 ```bash
-conda activate cnncls
+conda activate webapp
 ```
 
 ```bash
@@ -41,7 +41,7 @@ pip install -r requirements.txt
 # Export the environment variable
 
 ```bash
-export MONGODB_URL="mongodb+srv://arfin:arfin123@cluster1.8wfnrcv.mongodb.net/?appName=Cluster1"
+export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appName=Cluster0"
 ```
 
 # Components (Must be used this sequence)

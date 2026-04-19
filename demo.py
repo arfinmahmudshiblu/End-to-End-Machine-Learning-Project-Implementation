@@ -21,8 +21,8 @@
 # mongodburl=os.getenv("MONGODB_URL")
 # print(mongodburl)
 
-from us_visa.pipline.training_pipeline import TrainingPipeline
+# from us_visa.pipline.training_pipeline import TrainingPipeline
 
 
-pipeline = TrainingPipeline()
-pipeline.run_pipeline()
+# pipeline = TrainingPipeline()
+# pipeline.run_pipeline()

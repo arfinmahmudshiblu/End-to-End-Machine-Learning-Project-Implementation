@@ -24,6 +24,7 @@ class DataIngestionConfig:
     collection_name:str = DATA_INGESTION_COLLECTION_NAME
 
 
+
 # from dataclasses import dataclass, field
 # import os
 
