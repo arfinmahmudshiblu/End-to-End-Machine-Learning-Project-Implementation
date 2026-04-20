@@ -1,63 +1,42 @@
-import sys
-from typing import Optional
-
-import pandas as pd
-import numpy as np
-
-from us_visa.configuration.mongo_db_connection import MongoDBClient
-from us_visa.constants import DATABASE_NAME
-from us_visa.exception import USvisaException
+# from us_visa.configuration.mongo_db_connection import MongoDBClient
+# from us_visa.constants import DATABASE_NAME
+# from us_visa.exception import USvisaException
+# import pandas as pd
+# import sys
+# from typing import Optional
+# import numpy as np
 
 
-class USvisaData:
-    """
-    This class exports MongoDB collections as pandas DataFrames.
-    """
 
-    def __init__(self):
-        """
-        Initialize MongoDB client.
-        """
-        try:
-            self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
-        except Exception as e:
-            raise USvisaException(e, sys) from e
+# class USvisaData:
+#     """
+#     This class help to export entire mongo db record as pandas dataframe
+#     """
 
-    def export_collection_as_dataframe(
-        self,
-        collection_name: str,
-        database_name: Optional[str] = None
-    ) -> pd.DataFrame:
-        """
-        Export a MongoDB collection into a pandas DataFrame.
-        """
-        try:
-            # Select database safely
-            if database_name:
-                db = self.mongo_client.client[database_name]
-            else:
-                db = self.mongo_client.database
+#     def __init__(self):
+#         """
+#         """
+#         try:
+#             self.mongo_client = MongoDBClient(database_name=DATABASE_NAME)
+#         except Exception as e:
+#             raise USvisaException(e,sys)
+        
 
-            # Get collection
-            collection = db[collection_name]
+#     def export_collection_as_dataframe(self,collection_name:str,database_name:Optional[str]=None)->pd.DataFrame:
+#         try:
+#             """
+#             export entire collectin as dataframe:
+#             return pd.DataFrame of collection
+#             """
+#             if database_name is None:
+#                 collection = self.mongo_client.database[collection_name]
+#             else:
+#                 collection = self.mongo_client[database_name][collection_name]
 
-            # Fetch data
-            data = list(collection.find())
-
-            if not data:
-                return pd.DataFrame()
-
-            # Convert to DataFrame
-            df = pd.DataFrame(data)
-
-            # Drop MongoDB internal id field
-            if "_id" in df.columns:
-                df.drop(columns=["_id"], inplace=True)
-
-            # Normalize missing values
-            df.replace("na", np.nan, inplace=True)
-
-            return df
-
-        except Exception as e:
-            raise USvisaException(e, sys) from e
+#             df = pd.DataFrame(list(collection.find()))
+#             if "_id" in df.columns:
+#                 df = df.drop(columns=["_id"])
+#             df.replace({"na":np.nan},inplace=True)
+#             return df
+#         except Exception as e:
+#             raise USvisaException(e,sys)

@@ -27,11 +27,11 @@ git clone https://github.com/arfinmahmudshiblu/End-to-End-Machine-Learning-Proje
 ```
 
 ```bash
-conda create -n webapp python=3.12 -y
+conda create -n cnncls python=3.8 -y
 ```
 
 ```bash
-conda activate webapp
+conda activate cnncls
 ```
 
 ```bash

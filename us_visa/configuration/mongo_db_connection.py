@@ -1,66 +1,35 @@
-# import os
 # import sys
-# from typing import Optional
-
-# import pymongo
-# import certifi
 
 # from us_visa.exception import USvisaException
 # from us_visa.logger import logging
+
+# import os
 # from us_visa.constants import DATABASE_NAME, MONGODB_URL_KEY
+# import pymongo
+# import certifi
 
-# # CA certificate for secure TLS connection
 # ca = certifi.where()
-
 
 # class MongoDBClient:
 #     """
-#     MongoDB Client Handler
-
-#     Establishes and manages a singleton MongoDB connection.
+#     Class Name :   export_data_into_feature_store
+#     Description :   This method exports the dataframe from mongodb feature store as dataframe 
+    
+#     Output      :   connection to mongodb database
+#     On Failure  :   raises an exception
 #     """
+#     client = None
 
-#     client: Optional[pymongo.MongoClient] = None
-
-#     def __init__(self, database_name: str = DATABASE_NAME) -> None:
+#     def __init__(self, database_name=DATABASE_NAME) -> None:
 #         try:
-#             # Initialize singleton client only once
 #             if MongoDBClient.client is None:
 #                 mongo_db_url = os.getenv(MONGODB_URL_KEY)
-
-#                 if not mongo_db_url:
-#                     raise ValueError(
-#                         f"Environment variable '{MONGODB_URL_KEY}' is not set."
-#                     )
-
-#                 MongoDBClient.client = pymongo.MongoClient(
-#                     mongo_db_url,
-#                     tls=True,
-#                     tlsCAFile=ca,
-#                     serverSelectionTimeoutMS=5000
-#                 )
-
-#                 # Verify connection
-#                 MongoDBClient.client.admin.command("ping")
-#                 logging.info("MongoDB connection established successfully.")
-
+#                 if mongo_db_url is None:
+#                     raise Exception(f"Environment key: {MONGODB_URL_KEY} is not set.")
+#                 MongoDBClient.client = pymongo.MongoClient(mongo_db_url, tlsCAFile=ca)
 #             self.client = MongoDBClient.client
-
-#             if self.client is None:
-#                 raise ValueError("MongoDB client initialization failed.")
-
 #             self.database = self.client[database_name]
 #             self.database_name = database_name
-
+#             logging.info("MongoDB connection succesfull")
 #         except Exception as e:
-#             logging.error("Failed to connect to MongoDB.")
-#             raise USvisaException(e, sys) from e
-
-#     def get_collection(self, collection_name: str):
-#         """
-#         Return a MongoDB collection object.
-#         """
-#         try:
-#             return self.database[collection_name]
-#         except Exception as e:
-#             raise USvisaException(e, sys) from e
+#             raise USvisaException(e,sys)
