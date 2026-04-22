@@ -81,3 +81,13 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 5. us_visa_entity_estimator.py
 6. training_pipeline.py
 7. demo.py
+
+# Forth Work Flow
+1. constant
+2. config_entity.py
+3. artifact_entity.py
+4. component_data_transformation.py
+5. us_visa_entity_estimator.py
+6. model.yaml
+7. training_pipeline.py
+8. demo.py
