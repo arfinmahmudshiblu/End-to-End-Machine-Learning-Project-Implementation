@@ -53,7 +53,7 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 6. model_pusher.py
 
 
-# First Work Flow
+# First Work Flow(Data Ingestion)
 1. constant
 2. config_entity.py
 3. artifact_entity.py
@@ -63,7 +63,7 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 7. training_pipeline.py
 8. demo.py
 
-# Second Work Flow
+# Second Work Flow(Data Validation)
 1. constant
 2. config_schema.yaml
 3. config_entity.py
@@ -72,8 +72,7 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 6. training_pipeline.py
 7. demo.py
 
-
-# Third Work Flow
+# Third Work Flow(Data Transformation)
 1. constant
 2. config_entity.py
 3. artifact_entity.py
@@ -82,7 +81,7 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 6. training_pipeline.py
 7. demo.py
 
-# Forth Work Flow
+# Forth Work Flow(Model_Trainer)
 1. constant
 2. config_entity.py
 3. artifact_entity.py
@@ -91,3 +90,78 @@ export MONGODB_URL="mongodb+srv://arfin:arfin@cluster0.s0ljlbs.mongodb.net/?appN
 6. model.yaml
 7. training_pipeline.py
 8. demo.py
+
+
+## Project Structure
+
+```text
+USVISAProject/
+│
+├── artifacts/
+│   ├── feature_store/
+│   └── ingested/
+│
+├── config/
+│   ├── model.yaml
+│   └── schema.yaml
+│
+├── notebooks/
+│    ├── EDA_US_visa.ipynb
+│    ├── Feature_Engineering_&_Model_Training.ipynb
+│    ├── evidently_data_drift_detection.ipynb
+│    ├── Visadataset.csv
+│    └── mongoDB_test.ipynb
+│
+├── us_visa/
+│   ├── __init__.py
+│   │
+│   ├── components/
+│   │   ├── data_ingestion.py
+│   │   ├── data_validation.py
+│   │   ├── data_transformation.py
+│   │   ├── model_trainer.py
+│   │   ├── model_evaluation.py
+│   │   └── model_pusher.py
+│   │
+│   ├── configuration/
+│   │   └── mongo_db_connection.py
+│   │
+│   ├── constants/
+│   │   └── __init__.py
+│   │
+│   ├── data_access/
+│   │   ├── __init__.py
+│   │   └── usvisa_data.py
+│   │
+│   ├── entity/
+│   │   ├── __init__.py
+│   │   ├── config_entity.py
+│   │   └── artifact_entity.py
+│   │
+│   ├── pipeline/
+│   │   ├── training_pipeline.py
+│   │   └── prediction_pipeline.py
+│   │   
+│   │
+│   ├── utils/
+│   │   ├── __init__.py   
+│   │   └── main_utils.py
+│   │
+│   ├── exception.py
+│   │   └── __init__.py
+│   └── logger.py
+│       └── __init__.py
+│
+│
+├── templates/
+│   └── index.html
+│
+├── .gitignore
+├── app.py
+├── demo.py
+├── README.md
+├── requirements.txt
+├── setup.py
+├── templates.py
+└── test.py
+```

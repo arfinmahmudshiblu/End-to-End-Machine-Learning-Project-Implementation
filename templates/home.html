@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance Predictor</title>
+</head>
+<body>
+
+<div class="login">
+    <h1>Student Exam Performance Indicator</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="post">
+
+        <legend><h2>Prediction Form</h2></legend>
+
+        <!-- Gender -->
+        <label>Gender</label>
+        <select name="gender" required>
+            <option disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+        <br><br>
+
+        <!-- Ethnicity -->
+        <label>Race / Ethnicity</label>
+        <select name="ethnicity" required>
+            <option disabled selected>Select Ethnicity</option>
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select>
+        <br><br>
+
+        <!-- Parent Education -->
+        <label>Parental Education</label>
+        <select name="parental_level_of_education" required>
+            <option disabled selected>Select</option>
+            <option value="associate's degree">Associate</option>
+            <option value="bachelor's degree">Bachelor</option>
+            <option value="high school">High School</option>
+            <option value="master's degree">Master</option>
+            <option value="some college">Some College</option>
+            <option value="some high school">Some High School</option>
+        </select>
+        <br><br>
+
+        <!-- Lunch -->
+        <label>Lunch Type</label>
+        <select name="lunch" required>
+            <option disabled selected>Select</option>
+            <option value="free/reduced">Free/Reduced</option>
+            <option value="standard">Standard</option>
+        </select>
+        <br><br>
+
+        <!-- Test Prep -->
+        <label>Test Preparation</label>
+        <select name="test_preparation_course" required>
+            <option disabled selected>Select</option>
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select>
+        <br><br>
+
+        <!-- Reading Score -->
+        <label>Reading Score (0-100)</label>
+        <input type="number" name="reading_score" min="0" max="100" required>
+        <br><br>
+
+        <!-- Writing Score -->
+        <label>Writing Score (0-100)</label>
+        <input type="number" name="writing_score" min="0" max="100" required>
+        <br><br>
+
+        <input type="submit" value="Predict Math Score">
+
+    </form>
+
+    <h2>Prediction: {{ results }}</h2>
+
+</div>
+
+</body>
+</html>
